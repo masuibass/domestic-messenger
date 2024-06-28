@@ -1,0 +1,11 @@
+[package]
+name = "domestic-messenger"
+authors = ["@masuibass"]
+edition = "2021"
+publish = false
+
+[workspace]
+members = [".", "api", "db", "service"]
+
+[dependencies]
+api = { path = "api" }

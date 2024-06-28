@@ -1,0 +1,3 @@
+/target
+/sqlite/data/*
+!/sqlite/data/.gitkeep
