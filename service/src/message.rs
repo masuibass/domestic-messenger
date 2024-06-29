@@ -1,8 +1,8 @@
 use db::entities::message;
-use db::{DbConn, DbErr, EntityTrait, Message, Set};
+use db::{DbConn, DbErr, EntityTrait, Set};
 
 pub async fn list_messages(conn: &DbConn) -> Result<Vec<message::Model>, DbErr> {
-    Message::find().all(conn).await
+    message::Entity::find().all(conn).await
 }
 
 pub async fn create_message(conn: &DbConn, content: &str, member_id: i32) -> Result<i32, DbErr> {
@@ -12,6 +12,6 @@ pub async fn create_message(conn: &DbConn, content: &str, member_id: i32) -> Res
         ..Default::default()
     };
 
-    let insert_res = Message::insert(message).exec(conn).await?;
+    let insert_res = message::Entity::insert(message).exec(conn).await?;
     Ok(insert_res.last_insert_id)
 }

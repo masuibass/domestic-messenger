@@ -1,12 +1,12 @@
 use db::entities::member;
-use db::{DbConn, DbErr, EntityTrait, Member, Set};
+use db::{DbConn, DbErr, EntityTrait, Set};
 
 pub async fn list(conn: &DbConn) -> Result<Vec<member::Model>, DbErr> {
-    Member::find().all(conn).await
+    member::Entity::find().all(conn).await
 }
 
 pub async fn get(conn: &DbConn, id: i32) -> Result<Option<member::Model>, DbErr> {
-    Member::find_by_id(id).one(conn).await
+    member::Entity::find_by_id(id).one(conn).await
 }
 
 pub async fn create(conn: &DbConn, name: &str) -> Result<i32, DbErr> {
@@ -15,6 +15,6 @@ pub async fn create(conn: &DbConn, name: &str) -> Result<i32, DbErr> {
         ..Default::default()
     };
 
-    let insert_res = Member::insert(member).exec(conn).await?;
+    let insert_res = member::Entity::insert(member).exec(conn).await?;
     Ok(insert_res.last_insert_id)
 }
